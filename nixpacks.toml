@@ -1,0 +1,22 @@
+# Nixpacks configuration for Railway - .NET/C# Backend
+# Railway will use this configuration to build the .NET app
+# Works whether rootDir is set to "backend" or not
+
+[providers]
+detectors = ["dotnet"]
+
+[phases.setup]
+nixPkgs = { csharp = "8.0" }
+
+[phases.install]
+cmds = [
+  "if [ -f Backend.csproj ]; then dotnet restore Backend.csproj; else cd backend && dotnet restore Backend.csproj; fi"
+]
+
+[phases.build]
+cmds = [
+  "if [ -f Backend.csproj ]; then dotnet publish Backend.csproj -c Release -o /app/publish; else cd backend && dotnet publish Backend.csproj -c Release -o /app/publish; fi"
+]
+
+[start]
+cmd = "dotnet /app/publish/Backend.dll"

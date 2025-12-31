@@ -1,0 +1,6 @@
+# Frontend files - Railway should only build the backend
+index.html
+style.css
+config.js
+README.md
+!.railwayignore
